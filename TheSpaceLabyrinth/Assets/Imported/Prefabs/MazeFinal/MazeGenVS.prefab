@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7414609332266832758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7414609332266832756}
+  - component: {fileID: 7414609332266832757}
+  - component: {fileID: 9191523733972364997}
+  m_Layer: 0
+  m_Name: MazeGenVS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7414609332266832756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414609332266832758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.28, y: 0, z: -0.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7414609332266832757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414609332266832758}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db26de054c9db7f459812182619e167b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  Prefab1: {fileID: 5487118696859796409, guid: 5d81c0f928873cb4abeee7ef064e37ff, type: 3}
+  Prefab2: {fileID: 3820433611015726228, guid: 21da780dac51a54438a2eb268509e667, type: 3}
+  WallHorizontal: {fileID: 4944991008576203004, guid: 8fed820ac257ccc4fbca884a1b3bddbf,
+    type: 3}
+  WallVertical: {fileID: 5697067492917590713, guid: bd0b549fa69d2184a80e37084c26aa52,
+    type: 3}
+  Goal: {fileID: 2072335934691800773, guid: 92167aba80fc18e4183b26980c1d2cdb, type: 3}
+  SinglePlayerSpawn: {fileID: 782813269446565291, guid: be43b1b2a205acd42a05d106a6872d0d,
+    type: 3}
+  MazeTiles:
+  - {fileID: 7809176545142308343, guid: a34c57c5d2ce1134bb6a624a1cc4172b, type: 3}
+  - {fileID: 1301907800450615097, guid: 40301170fb47aed418b307ce50ab05ac, type: 3}
+  - {fileID: 4128909371167019837, guid: 4cea073806876b9478cdb68237bec169, type: 3}
+  - {fileID: 4306203503146864633, guid: 12c7438705ecb9f4da99f4c929115050, type: 3}
+  - {fileID: 6482780687316732842, guid: 2e635a25085871a468ccf83ae06bd04c, type: 3}
+  - {fileID: 3153734817921362954, guid: 61216f7e923f18c44843226e227a6760, type: 3}
+  - {fileID: 5804949777760907562, guid: 16b09f7a726bb3f449b048f97ec7db02, type: 3}
+  - {fileID: 8779371183001584862, guid: 15d16170b92a40a4abb845e5599350ba, type: 3}
+  ListCount: 0
+  MazeTileRandomNumber: 0
+  Tile: {fileID: 0}
+  RowAlignment: 0
+  LastTile: {fileID: 0}
+  WallPosition: {x: 0, y: 0, z: 0}
+  SpawnSpawned: 0
+  Position: {x: 0, y: 0, z: 0}
+  WantedRows: 20
+  WantedColumns: 25
+  Column: 0
+  Row: 0
+--- !u!114 &9191523733972364997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7414609332266832758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784c758504d1d3b41be10ab1ac9b261e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  Prefab1: {fileID: 5487118696859796409, guid: 5d81c0f928873cb4abeee7ef064e37ff, type: 3}
+  Prefab2: {fileID: 3820433611015726228, guid: 21da780dac51a54438a2eb268509e667, type: 3}
+  WallHorizontal: {fileID: 4944991008576203004, guid: 8fed820ac257ccc4fbca884a1b3bddbf,
+    type: 3}
+  WallVertical: {fileID: 5697067492917590713, guid: bd0b549fa69d2184a80e37084c26aa52,
+    type: 3}
+  Goal: {fileID: 2072335934691800773, guid: 92167aba80fc18e4183b26980c1d2cdb, type: 3}
+  SinglePlayerSpawn: {fileID: 782813269446565291, guid: be43b1b2a205acd42a05d106a6872d0d,
+    type: 3}
+  MazeTiles:
+  - {fileID: 7809176545142308343, guid: a34c57c5d2ce1134bb6a624a1cc4172b, type: 3}
+  - {fileID: 1301907800450615097, guid: 40301170fb47aed418b307ce50ab05ac, type: 3}
+  - {fileID: 4128909371167019837, guid: 4cea073806876b9478cdb68237bec169, type: 3}
+  - {fileID: 4306203503146864633, guid: 12c7438705ecb9f4da99f4c929115050, type: 3}
+  - {fileID: 6482780687316732842, guid: 2e635a25085871a468ccf83ae06bd04c, type: 3}
+  - {fileID: 3153734817921362954, guid: 61216f7e923f18c44843226e227a6760, type: 3}
+  - {fileID: 5804949777760907562, guid: 16b09f7a726bb3f449b048f97ec7db02, type: 3}
+  - {fileID: 8779371183001584862, guid: 15d16170b92a40a4abb845e5599350ba, type: 3}
+  ListCount: 0
+  MazeTileRandomNumber: 0
+  Tile: {fileID: 0}
+  RowAlignment: 0
+  LastTile: {fileID: 0}
+  WallPosition: {x: 0, y: 0, z: 0}
+  SpawnSpawned: 0
+  Position: {x: 0, y: 0, z: 0}
+  WantedRows: 0
+  WantedColumns: 0
+  Column: 0
+  Row: 0
