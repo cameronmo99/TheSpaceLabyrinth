@@ -31,6 +31,7 @@ public class EasySP : BaseAIScript
     {
         //Goes to Target
         GoToTarget();
+        //GoToSetTarget();
 
         //If on SinglePlayer Scene Will Load relivent Scenes
         if (Vector3.Distance(transform.position, Player1Transform.position) < 3)

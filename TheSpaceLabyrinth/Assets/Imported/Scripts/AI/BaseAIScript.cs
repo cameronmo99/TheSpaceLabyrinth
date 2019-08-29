@@ -11,6 +11,8 @@ public class BaseAIScript : MonoBehaviour
     public float Distance;
 
     public int WaypointRandomNumber;
+    public int WhichWaypoint;
+    public int WaypointAmount;
 
 
     public float RaycastDistance;
@@ -24,9 +26,11 @@ public class BaseAIScript : MonoBehaviour
     public GameObject WaypointRight;
     public GameObject WaypointBackwards;
     public GameObject WaypointGameObject;
+    public GameObject CurrentWaypintGameobject;
+    public Transform CurrentWaypoint;
 
     public List<GameObject> WaypointsList;
-  //  List<GameObject> WaypointsList = new List<GameObject>();
+    //  List<GameObject> WaypointsList = new List<GameObject>();
     public Vector3 ForwardVector;
     public Vector3 LeftVector;
     public Vector3 RightVector;
@@ -53,7 +57,7 @@ public class BaseAIScript : MonoBehaviour
     {
 
 
-
+        //WaypointAmount = WaypointsList.Count;
         //   List<GameObject> WaypointsList = new List<GameObject>();
         // ForwardVector = new Vector3(0, 0, RaycastDistance);
         // LeftVector = new Vector3(-RaycastDistance, 0, 0);
@@ -103,7 +107,7 @@ public class BaseAIScript : MonoBehaviour
 
         //Gets Waypoints and adds them to a List
         if (Physics.Raycast(transform.position, Vector3.forward, out HitForward, RaycastDistance))
-            {
+        {
 
             if (HitForward.transform.tag == "Waypoint")
             {
@@ -160,36 +164,72 @@ public class BaseAIScript : MonoBehaviour
 
         WaypointGameObject = WaypointsList[WaypointRandomNumber];
 
-      //  if (WaypointGameObject == null)
-      //  {
-      //      Debug.Log("test");
-      //      ChooseWaypoint();
-      //  }
+        //  if (WaypointGameObject == null)
+        //  {
+        //      Debug.Log("test");
+        //      ChooseWaypoint();
+        //  }
 
         //Gets the Waypoint Transform 
         Waypoint = WaypointGameObject.transform;
         BlacklistedWaypoint = WaypointGameObject;
 
 
-       // if (BlacklistedWaypoint == WaypointGameObject)
-       // {
-       //     if (ListCount > 1)
-       //     {
-       //         ChooseWaypoint();
-       //     }
-       //
+        // if (BlacklistedWaypoint == WaypointGameObject)
+        // {
+        //     if (ListCount > 1)
+        //     {
+        //         ChooseWaypoint();
+        //     }
+        //
         //}
 
+
+    }
+
+    public void GoToSetTarget()
+    {
+        CurrentWaypintGameobject = WaypointsList[WhichWaypoint];
+        CurrentWaypoint = CurrentWaypintGameobject.transform;
+        if (WhichWaypoint == WaypointAmount)
+        {
+            WhichWaypoint = 0;
+        }
+        //UpdateWaypoints();
+        if (Vector3.Distance(CurrentWaypoint.position, transform.position) <= Distance)
+        {
+            WhichWaypoint++;
+        }
+
+        if (player1Near == true)
+        {
+            transform.LookAt(Player1Transform);
+            transform.position += transform.forward * (Speed * 2) * Time.deltaTime;
+        }
+        else
+        {
+            GoToSetWaypoint();
+        }
+
+        if (player2Near == true)
+        {
+            transform.LookAt(Player2Transform);
+            transform.position += transform.forward * (Speed * 2) * Time.deltaTime;
+        }
+        else
+        {
+            GoToSetWaypoint();
+        }
 
     }
 
     public void GoToTarget()
     {
         //If the Player is Near will Attack the Player else will go to Waypoint
-        if(player1Near == true)
+        if (player1Near == true)
         {
             transform.LookAt(Player1Transform);
-            transform.position += transform.forward * (Speed * 2 ) * Time.deltaTime;
+            transform.position += transform.forward * (Speed * 2) * Time.deltaTime;
         }
         else
         {
@@ -221,6 +261,21 @@ public class BaseAIScript : MonoBehaviour
         }
 
     }
+    public void GoToSetWaypoint()
+    {
+        //Looks and Goes to Waypoint
+        transform.LookAt(Waypoint);
+        if (Vector3.Distance(transform.position, CurrentWaypoint.position) >= Distance)
+        {
+            transform.position += transform.forward * Speed * Time.deltaTime;
+        }
+        /*if (Vector3.Distance(transform.position, CurrentWaypoint.position) <= Distance)
+        {
+            //ClearWaypointsList();
+            ChooseWaypoint();
+        }*/
+
+    }
     //public void GetPlayers()
     //{
     //    Player1Gameobject = GameObject.FindGameObjectWithTag("Player1");
@@ -228,6 +283,13 @@ public class BaseAIScript : MonoBehaviour
     //    Player2Gameobject = GameObject.FindGameObjectWithTag("Player2");
     //    Player1Transform = Player1Gameobject.transform;
     //}
+    public void UpdateWaypoints()
+    {
+        WaypointAmount = WaypointsList.Count;
+
+
+
+    }
 
 }
 

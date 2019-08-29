@@ -15,6 +15,9 @@ public class PlayerScriptV2 : MonoBehaviour
     public UIManager UIManager;
     public bool EscapeMenu = false;
     public GameObject PauseMenu;
+    //public Rigidbody PlayerRigidbody;
+    //public Quaternion CameraAngle;
+    //public Camera MainCamera;
 
     // Use this for initialization
     void Start()
@@ -34,6 +37,34 @@ public class PlayerScriptV2 : MonoBehaviour
         Vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         Horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         transform.Translate(Horizontal, 0, Vertical);
+
+       // CameraAngle = MainCamera.transform.rotation;
+
+       //PlayerRigidbody.transform.rotation = CameraAngle;//Quaternion.Euler(CameraAngle);
+
+        /*if (Input.GetKey(KeyCode.W))
+        {
+            PlayerRigidbody.AddForce(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            PlayerRigidbody.AddForce(Vector3.back * speed * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            PlayerRigidbody.AddForce(Vector3.left * speed * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            PlayerRigidbody.AddForce(Vector3.right * speed * Time.deltaTime);
+        }*/
+
+
+
+
         Goal = GameObject.FindGameObjectWithTag("Goal");
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         UIManager = GameManager.GetComponent<UIManager>();

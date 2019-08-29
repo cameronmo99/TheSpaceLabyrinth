@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
         }
 
         //If the Scene is Single Player Will load relivent Scenes
-        if(CurrentScene.name == "SinglePlayer")
+        if(CurrentScene.name == "Level1")
         {
             if (SPWON == true)
             {
@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
             OptionsCanvas.gameObject.SetActive(false);
             MainMenuCanves.gameObject.SetActive(true);
         }
-        if (CurrentScene.name == "SinglePlayer")
+        if (CurrentScene.name == "Level1")
         {
             DisableMainCanvas = false;
 
@@ -166,7 +166,7 @@ public class UIManager : MonoBehaviour
     //Loads the Single Player
     public void PlaySinglePlayerGame()
     {
-        SceneManager.LoadScene("SinglePlayer");
+        SceneManager.LoadScene("Level1");
     }
 
     //Loads the VS Map
