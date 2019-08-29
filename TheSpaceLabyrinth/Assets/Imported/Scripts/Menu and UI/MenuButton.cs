@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuButton : MonoBehaviour
 {
     public GameObject GameManager;
+    public string Level;
 
     //Loads the MainMenu and Destroys the Game Manager
     public void BackToMenu()
@@ -20,4 +21,10 @@ public class MenuButton : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void SaveLevel()
+    {
+       // PlayerPrefs.SetString("Level", m_PlayerName);
+    }
+
 }

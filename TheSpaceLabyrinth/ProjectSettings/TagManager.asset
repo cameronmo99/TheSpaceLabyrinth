@@ -9,6 +9,8 @@ TagManager:
   - Player1
   - Waypoint
   - AI
+  - DoorControl
+  - GameManager
   layers:
   - Default
   - TransparentFX

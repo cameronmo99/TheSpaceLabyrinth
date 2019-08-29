@@ -10,15 +10,32 @@ public class BaseTrapClass : MonoBehaviour
     public float RandomFlickerNumber;
     public float RandomFlickerNumberLow;
     public float RandomFlickerNumberHigh;
+    public bool PlayerHasEntered;
+    public PlayerScriptV2 PlayerScript;
 
-    void Start()
+    IEnumerator TorchFlicker()
     {
-        
+        while (true)
+        {
+            PlayerLight.enabled = true;
+
+            yield return new WaitForSeconds(RandomFlickerNumber);
+
+            RandomFlickerNumber = Random.Range(RandomFlickerNumberLow, RandomFlickerNumberHigh);
+
+            PlayerLight.enabled = false;
+
+            yield return new WaitForSeconds(RandomFlickerNumber);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SlowDown()
     {
-        
+        while (true)
+        {
+            PlayerScript = Player.GetComponent<PlayerScriptV2>();
+            PlayerScript.speed = Speed;
+
+        }
     }
 }
