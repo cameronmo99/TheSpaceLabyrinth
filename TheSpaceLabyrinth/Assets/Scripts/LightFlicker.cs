@@ -31,6 +31,7 @@ public class LightFlicker : MonoBehaviour {
     {
         while(true)
         {
+            //Make the Light Flicker Different Colours
             RandomNumber = Random.Range(LowRandom, HighRandom);
 
             LightComponant.enabled = true;

@@ -15,16 +15,17 @@ public class PlayerScriptV2 : MonoBehaviour
     public UIManager UIManager;
     public bool EscapeMenu = false;
     public GameObject PauseMenu;
-    //public Rigidbody PlayerRigidbody;
-    //public Quaternion CameraAngle;
-    //public Camera MainCamera;
+    public Rigidbody PlayerRigidbody;
+    public Vector3 CameraAngle;
+    public Camera MainCamera;
+    public float LimitOfSpeed;
 
     // Use this for initialization
     void Start()
     {
         //Locks the Cursor and gets the GameManager
         Cursor.lockState = CursorLockMode.Locked;
-        PauseMenu = GameObject.Find("PauseMenu");
+        //PauseMenu = GameObject.Find("PauseMenu");
         Goal = GameObject.FindGameObjectWithTag("Goal");
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         UIManager GameObjectScript = GameManager.GetComponent<UIManager>();
@@ -34,33 +35,41 @@ public class PlayerScriptV2 : MonoBehaviour
     void Update()
     {
         //Gets Info for Controller and Finds the GameManger
-        Vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        Horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        //Vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        //Horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         transform.Translate(Horizontal, 0, Vertical);
 
-       // CameraAngle = MainCamera.transform.rotation;
+        //CameraAngle = MainCamera.transform.rotation.eulerAngles;
 
-       //PlayerRigidbody.transform.rotation = CameraAngle;//Quaternion.Euler(CameraAngle);
+        //Vector3 CameraAngle = new Vector3(MainCamera.transform.eulerAngles.x, MainCamera.transform.eulerAngles.y, MainCamera.transform.eulerAngles.z);
 
-        /*if (Input.GetKey(KeyCode.W))
+        //PlayerRigidbody.transform.rotation = Quaternion.Euler(CameraAngle);
+
+        transform.rotation = MainCamera.transform.rotation;
+
+        if (Input.GetKey(KeyCode.W))
         {
-            PlayerRigidbody.AddForce(Vector3.forward * speed * Time.deltaTime);
+            PlayerRigidbody.AddForce(transform.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            PlayerRigidbody.AddForce(Vector3.back * speed * Time.deltaTime);
+            PlayerRigidbody.AddForce(-transform.forward * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            PlayerRigidbody.AddForce(Vector3.left * speed * Time.deltaTime);
+            PlayerRigidbody.AddForce(-transform.right * speed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            PlayerRigidbody.AddForce(Vector3.right * speed * Time.deltaTime);
-        }*/
+            PlayerRigidbody.AddForce(transform.right * speed * Time.deltaTime);
+        }
+        else
+        {
+            PlayerRigidbody.velocity = new Vector3(0, 0, 0);
+        }
 
 
 
@@ -117,5 +126,13 @@ public class PlayerScriptV2 : MonoBehaviour
         }
 
 
+    }
+
+    void FixedUpdate()
+    {
+        if (PlayerRigidbody.velocity.magnitude > LimitOfSpeed)
+        {
+            PlayerRigidbody.velocity = PlayerRigidbody.velocity.normalized * LimitOfSpeed;
+        }
     }
 }

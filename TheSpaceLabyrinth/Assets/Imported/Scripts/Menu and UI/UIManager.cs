@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     public Slider SinglePlayerCanvasColumnsSlider;
     public Slider VSCanvasRowSlider;
     public Slider VSCanvasColumnsSlider;
+    public string LevelLoad;
 
     public int Life = 0;
 
@@ -76,21 +77,21 @@ public class UIManager : MonoBehaviour
           //  RowsWanted = RowsWanted.value;
           //SinglePlayerCanvasColumnsSlider = GameObject.Find("ColumnSlider").GetComponent<Slider>();
           //  ColumnsWanted = SinglePlayerCanvasRowSlider.value;
-            RowsWanted = RowSlider.value;
-            ColumnsWanted = ColumnSlider.value;
+           // RowsWanted = RowSlider.value;
+           // ColumnsWanted = ColumnSlider.value;
           //RowSliderAmount = GameObject.Find("RowAmount").GetComponent<Text>();
           //ColumnSliderAmount = GameObject.Find("ColumnAmount").GetComponent<Text>();
-            RowSliderAmount.text = RowsWanted.ToString();
-            ColumnSliderAmount.text = ColumnsWanted.ToString();
+          //  RowSliderAmount.text = RowsWanted.ToString();
+          //  ColumnSliderAmount.text = ColumnsWanted.ToString();
             if (DisableMainCanvas == true)
             {
                 MainMenuCanves.gameObject.SetActive(true);
             }
 
-            RowsWantedVS = RowSliderVS.value;
-            ColumnsWantedVS = ColumnSliderVS.value;
-            RowSliderAmountVS.text = RowsWantedVS.ToString();
-            ColumnSliderAmountVS.text = ColumnsWantedVS.ToString();
+            //RowsWantedVS = RowSliderVS.value;
+            //ColumnsWantedVS = ColumnSliderVS.value;
+           // RowSliderAmountVS.text = RowsWantedVS.ToString();
+           // ColumnSliderAmountVS.text = ColumnsWantedVS.ToString();
 
         }
 
@@ -173,5 +174,11 @@ public class UIManager : MonoBehaviour
     public void PlayVSGame()
     {
         SceneManager.LoadScene("VS");
+    }
+
+    public void Load()
+    {
+        LevelLoad = PlayerPrefs.GetString("CurrentScene");
+        SceneManager.LoadScene(LevelLoad);
     }
 }

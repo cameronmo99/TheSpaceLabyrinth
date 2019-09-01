@@ -59,6 +59,8 @@ public class KeyCardDoor : MonoBehaviour
 
     void Update()
     {
+
+        //Open the Door
         if (ParentTrigger.DoorTriggerBool == true)
         {
              if (DoorControl.Doors[DoorNumber] == true)
@@ -72,6 +74,8 @@ public class KeyCardDoor : MonoBehaviour
                 }
             }
         }
+
+        //Closes the Door
         if (ParentTrigger.DoorTriggerBool == false)
         {
             DoorOpening = false;

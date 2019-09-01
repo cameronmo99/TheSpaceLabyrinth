@@ -60,6 +60,15 @@ public class AIFinal : MonoBehaviour
 
     public bool AtSentryPoint;
 
+    public float SentryPatrolWaitTime;
+
+    public bool SentryPatrol;
+
+    public bool SentryPatrolStated;
+
+    public bool StopAI;
+
+
 
 
 
@@ -71,6 +80,7 @@ public class AIFinal : MonoBehaviour
         Patrol,
         Chase,
         Sentry,
+        SentryPartol,
     }
 
     State ActiveState;
@@ -87,6 +97,7 @@ public class AIFinal : MonoBehaviour
 
     public void Start()
     {
+        //Sets start State to Patrol
         setActiveState(State.Patrol);
 
         AI_Rigidbody = GetComponent<Rigidbody>();
@@ -109,11 +120,12 @@ public class AIFinal : MonoBehaviour
         Debug.Log(ActiveState);
         switch (ActiveState)
         {
+
             //Attack State
             case State.Attack:
 
 
-                SceneManager.LoadScene("Lose"); //Change to UI
+                SceneManager.LoadScene(CurrentScene.name); //Change to UI
                 setActiveState(State.Patrol);
 
                 break;
@@ -122,12 +134,16 @@ public class AIFinal : MonoBehaviour
 
             //Patrol Staet
             case State.Patrol:
-
+                //Checks what the AI is ment to be doing.
                 if (Sentry == true)
                 {
                     setActiveState(State.Sentry);
                 }
 
+                if (SentryPatrol == true)
+                {
+                    setActiveState(State.SentryPartol);
+                }
                 //Ai movement
                 AI_Rigidbody.AddForce((transform.forward * AI_Speed));
 
@@ -167,7 +183,7 @@ public class AIFinal : MonoBehaviour
                     WhichCube++;
                 }
 
-                if (Vector3.Distance(transform.position, Player.position) <= AttackDistance)
+                if (Vector3.Distance(transform.position, Player.position) <= ChaseDistance)
                 {
                     setActiveState(State.Chase);
                 }
@@ -252,14 +268,55 @@ public class AIFinal : MonoBehaviour
 
 
                 break;
+
+
+                //SentryPatrolState
+            case State.SentryPartol:
+
+                SearchLight.color = Color.green;
+
+                if (NumberOfWaypoints == WhichCube)
+                {
+                    WhichCube = 0;
+                }
+
+                transform.LookAt(Waypoints[WhichCube]);
+                AI_Rigidbody.AddForce((transform.forward * AI_Speed));
+
+                if (SentryPatrolStated == false)
+                {
+                    SearchLight.color = Color.green;
+                    StopAI = false;
+                    if (Vector3.Distance(Waypoints[WhichCube].position, transform.position) <= PatrolDistance)
+                    {
+                        SearchLight.color = Color.yellow;
+                        SentryPatrolStated = true;
+                        StartCoroutine("SentryStay");
+                        SentryPatrolStated = true;
+                    }
+                }
+
+                if (Vector3.Distance(transform.position, Player.position) <= ChaseDistance)
+                {
+                    StopCoroutine("SentryStay");
+                    StopAI = false;
+                    SentryPatrolStated = false;
+                    
+                    setActiveState(State.Chase);
+                }
+
+
+
+                break;
         }
     }
 
     void FixedUpdate()
     {
+        //Speed Limit
         if (Vector3.Distance(Waypoints[WhichCube].position, transform.position) <= SpeedLimitAtWaypoint)
         {
-            SpeedLimit = 0.5f;
+            SpeedLimit = 1f;
         }
         else
         {
@@ -271,7 +328,31 @@ public class AIFinal : MonoBehaviour
         {
             AI_Rigidbody.velocity = AI_Rigidbody.velocity.normalized * SpeedLimit;
         }
+
+        if (StopAI == true)
+        {
+            AI_Rigidbody.velocity = new Vector3(0, 0, 0);
+        }
+        
     }
+    //SentryStay Coroutine
+    IEnumerator SentryStay()
+    {
+        while (true)
+        {
+            StopAI = true;
+            SearchLight.color = Color.yellow;
+            yield return new WaitForSeconds(SentryPatrolWaitTime);
+
+            WhichCube++;
+            StopAI = false;
+            SentryPatrolStated = false;
+            yield return new WaitForSeconds(1f);
+            SearchLight.color = Color.green;
+            StopCoroutine("SentryStay");
+        }
+    }
+
 
 
 }

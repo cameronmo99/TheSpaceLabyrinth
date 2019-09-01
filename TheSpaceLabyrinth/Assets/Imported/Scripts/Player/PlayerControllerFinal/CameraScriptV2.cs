@@ -21,7 +21,7 @@ public class CameraScriptV2 : MonoBehaviour
     void Update()
     {
         //Gets the Vector2 Data from the Mouse
-        var Mouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        var Mouse = new Vector2(Input.GetAxisRaw("Mouse X"), 0/*Input.GetAxisRaw("Mouse Y")*/);
         Mouse = Vector2.Scale(Mouse, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
         //Smooths the Movement
         Smoothing.x = Mathf.Lerp(Smoothing.x, Mouse.x, 1f / smoothing);
@@ -38,5 +38,9 @@ public class CameraScriptV2 : MonoBehaviour
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         }
 
+        if (this.transform.rotation.x < 0)
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 }

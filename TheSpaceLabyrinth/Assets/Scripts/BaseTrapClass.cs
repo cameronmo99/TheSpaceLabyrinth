@@ -17,6 +17,8 @@ public class BaseTrapClass : MonoBehaviour
     {
         while (true)
         {
+
+            //Makes the torch Flicker
             PlayerLight.enabled = true;
 
             yield return new WaitForSeconds(RandomFlickerNumber);
@@ -29,13 +31,5 @@ public class BaseTrapClass : MonoBehaviour
         }
     }
 
-    IEnumerator SlowDown()
-    {
-        while (true)
-        {
-            PlayerScript = Player.GetComponent<PlayerScriptV2>();
-            PlayerScript.speed = Speed;
 
-        }
-    }
 }
